@@ -1,11 +1,14 @@
-var timeScale = d3.scaleTime()
-  .domain([new Date(2016, 0 ,1), new Date()])
-  .range([0, 100]);
+var quantizeScale = d3.scaleQuantize() 
+// breaks range into different equal 'categories'
+  .domain([0, 100])
+  .range(["red", "white", "green"])
 
-  // takes an input range of January 1, 2016 - now and outputs it on a linear scale from 0 - 100
 
-console.log(timeScale(new Date(2016, 4, 15)));
-console.log(timeScale(new Date(2016, 10, 3)));
-console.log(timeScale(new Date(2017, 4, 15)));
+  console.log(quantizeScale(22));
+  console.log(quantizeScale(50));
+  console.log(quantizeScale(88));
+  console.log(quantizeScale(90));
 
-console.log(timeScale.invert(50))
+  console.log(quantizeScale.invertExtent('white'))
+
+  // for mapping input data to specific set of output values
