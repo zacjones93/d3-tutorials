@@ -49,7 +49,7 @@ d3.json('https://swapi.co/api/people', (err, json) => {
 // styles divs based on data attributes
   update.merge(enter)
     .style('width', d => d.mass + 'px')
-    .style('height', d => d.height + 'px')
+    .style('height', d => '50px')
     .style('background', d => {
       if(d.gender === 'male'){
         return 'lightblue'
