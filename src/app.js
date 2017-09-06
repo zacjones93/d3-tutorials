@@ -1,59 +1,36 @@
-// d3.json('data/data.json', function (data){
-//  var min =  d3.min(data, function (d) {
-//     return d.age
-//   })
-//   console.log(min)
+// modify a DOM element in d3
+// var secondLink = d3.selectAll('a:nth-child(2)')
+//   .attr('href', 'http://google.com')
+//   .classed('red', true)
+//   .html('Inventory <b>SALE</b>')
 
-//   var max =  d3.max(data, function (d) {
-//     return d.age
-//   })
-//   console.log(max)
+d3.select('.title')
+  .append('div')
+    .style('color', 'red')
+    .html('Inventory <b>SALE</b>')
+  .append('button')
+    .style('display', 'block')
+    .text('submit');
+    
 
-//   // captures the min and max in an array
-//   var extent =  d3.extent(data, function (d) {
-//     return d.age
-//   })
-//   console.log(extent)
 
-//   var scale = d3.scaleLinear()
-//     .domain(extent)
-//     .range([0,600])
-//     console.log(scale(37))
-
-//   var ages = d3.set(data, function (d) {
-//     return d.age;
-//   })
-//   console.log(ages.values())
-
-// })
-
-d3.json('https://swapi.co/api/starships', function (data) {
-  //console.log(data.results)
-  var costExtent =  d3.extent(data.results, function (d) {
-    let cost = parseInt(d.cost_in_credits, 10)
-    if (typeof cose !== NaN) {
-      return cost
-    } else return
+// d3.json('https://swapi.co/api/people', function (data) {
+//   //console.log(data.results)
+//   var costExtent =  d3.extent(data.results, function (d) {
+//     let cost = parseInt(d.cost_in_credits, 10)
+//     if (typeof cose !== NaN) {
+//       return cost
+//     } else return
       
-  })
-  console.log(costExtent)
-  let scale = d3.scaleQuantize()
-    .domain(costExtent)
-    .range(["small", "medium", "large", "fucking huge"])
+//   })
+//   console.log(costExtent)
+//   let scale = d3.scaleQuantize()
+//     .domain(costExtent)
+//     .range(["small", "medium", "large", "fucking huge"])
 
-  let scaledCost = [];
-  data.results.forEach(function(spaceCraft){
-    scaledCost.push(scale(spaceCraft.cost_in_credits))
-  })
+//   let scaledCost = [];
+//   data.results.forEach(function(spaceCraft){
+//     scaledCost.push(scale(spaceCraft.cost_in_credits))
+//   })
 
-
-
-})
-
-// d3.csv('data/data.csv', function (data){
-//   console.log(data);
-// })
-
-// d3.tsv('data/data.tsv', function (data){
-//   console.log(data);
 // })
