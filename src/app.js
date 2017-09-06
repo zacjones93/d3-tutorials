@@ -1,14 +1,11 @@
-var quantizeScale = d3.scaleQuantize() 
-// breaks range into different equal 'categories'
-  .domain([0, 100])
+var ordinalScale = d3.scaleOrdinal() 
+// discreet non-numeric values that we want to map to specific output values
+  .domain(["poor", "good", "great"])
   .range(["red", "white", "green"])
 
 
-  console.log(quantizeScale(22));
-  console.log(quantizeScale(50));
-  console.log(quantizeScale(88));
-  console.log(quantizeScale(90));
+  console.log(ordinalScale("good"));
+  console.log(ordinalScale("great"));
+  console.log(ordinalScale("poor"));
+  
 
-  console.log(quantizeScale.invertExtent('white'))
-
-  // for mapping input data to specific set of output values
