@@ -1,36 +1,64 @@
-// modify a DOM element in d3
-// var secondLink = d3.selectAll('a:nth-child(2)')
-//   .attr('href', 'http://google.com')
-//   .classed('red', true)
-//   .html('Inventory <b>SALE</b>')
+var scores = [
+  { name: 'Alice', score: 96 },
+  { name: 'Billy', score: 83 },
+  { name: 'Cindy', score: 91 },
+  { name: 'David', score: 96 },
+  { name: 'Emily', score: 88 }
+];
 
-d3.select('.title')
+let update = d3.select('.chart')
+  .selectAll('div')
+  .data(scores, function (d) {
+    return d ? d.name : this.innerText;
+  })
+  .style('color', 'blue')
+
+  let enter = update.enter()
+    .append('div')
+    .text(function (d) {
+      return d.name;
+    })
+    .style('color', 'green');
+
+  update.exit().remove();
+
+  update.merge(enter)
+    .style('width', d => d.score + 'px')
+    .style('height', '50px')
+    .style('background', 'lightgreen')
+    .style('border', '1px solid black')
+// ============================================
+
+let data;
+// fetches data from api
+d3.json('https://swapi.co/api/people', (err, json) => {
+  if (err) return console.warn(err);
+// selects divs in the .chart-2 class
+  let update = d3.select(".chart-2")
+    .selectAll('div')
+    .data(json.results, (d) => {
+      return d ? d.name : this.innerText;
+    })
+// adds divs based on the amount of items in fetched data    
+  let enter = update.enter()
   .append('div')
-    .style('color', 'red')
-    .html('Inventory <b>SALE</b>')
-  .append('button')
-    .style('display', 'block')
-    .text('submit');
-    
-
-
-// d3.json('https://swapi.co/api/people', function (data) {
-//   //console.log(data.results)
-//   var costExtent =  d3.extent(data.results, function (d) {
-//     let cost = parseInt(d.cost_in_credits, 10)
-//     if (typeof cose !== NaN) {
-//       return cost
-//     } else return
-      
-//   })
-//   console.log(costExtent)
-//   let scale = d3.scaleQuantize()
-//     .domain(costExtent)
-//     .range(["small", "medium", "large", "fucking huge"])
-
-//   let scaledCost = [];
-//   data.results.forEach(function(spaceCraft){
-//     scaledCost.push(scale(spaceCraft.cost_in_credits))
-//   })
-
-// })
+  .text((d) => {
+    return d.name
+  })
+  .style('color', 'black')
+// styles divs based on data attributes
+  update.merge(enter)
+    .style('width', d => d.mass + 'px')
+    .style('height', d => d.height + 'px')
+    .style('background', d => {
+      if(d.gender === 'male'){
+        return 'lightblue'
+      } else if(d.gender === 'female') {
+        return 'pink'
+      } else {
+        return 'gray'
+      }
+       
+    })
+    .style('border', '1px solid black')
+ })
